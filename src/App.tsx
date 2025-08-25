@@ -1,35 +1,69 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, useEffect, useMemo } from "react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
+import { ApplicationRestApi } from "./services/web-api/rest/application-rest-api";
+import { ApplicationContext } from "./context/ApplicationContext";
+import type {
+  UserSession,
+  ApplicationContextProps,
+} from "./context/ApplicationContext";
+import LoginPage from "./pages/LoginPage";
+import MoviesPage from "./pages/MoviesPage";
+import MovieDetailsPage from "./pages/MovieDetailsPage";
+import { ApplicationApi } from "./services/web-api/application-api";
+import Layout from "./Layout";
+
+const webApi = new ApplicationApi(new ApplicationRestApi());
+
+// function ProtectedRoute({ children }: { children: React.ReactElement }) {
+//   const storedUser = sessionStorage.getItem("userSession");
+//   return storedUser ? children : <Navigate to="/login" />;
+// }
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [userSession, setUserSession] = useState<UserSession | null>(null);
+  const [communicationToken, setCommunicationToken] = useState<string | null>(
+    null
+  );
+
+  useEffect(() => {
+    try {
+      const storedUser = sessionStorage.getItem("userSession");
+      if (storedUser) {
+        const parsedUser: UserSession = JSON.parse(storedUser);
+        setUserSession(parsedUser);
+      }
+    } catch (error) {
+      console.error("Error parsing user session:", error);
+    }
+  }, []);
+
+  const applicationContext: ApplicationContextProps = useMemo(
+    () => ({
+      webApi,
+      communicationToken,
+      setCommunicationToken,
+      userSession,
+      setUserSession,
+    }),
+    [communicationToken, userSession]
+  );
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <BrowserRouter>
+      <ApplicationContext.Provider value={applicationContext}>
+        <Layout>
+          <Routes>
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/movies" element={<MoviesPage />} />
+            <Route path="/movie/:id" element={<MovieDetailsPage />} />
+            <Route path="*" element={<Navigate to="/movies" />} />
+          </Routes>
+        </Layout>
+      </ApplicationContext.Provider>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;
