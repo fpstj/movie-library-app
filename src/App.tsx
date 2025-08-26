@@ -8,11 +8,10 @@ import type {
   UserSession,
   ApplicationContextProps,
 } from "./context/ApplicationContext";
-import LoginPage from "./pages/LoginPage";
-import MoviesPage from "./pages/MoviesPage";
-import MovieDetailsPage from "./pages/MovieDetailsPage";
 import { ApplicationApi } from "./services/web-api/application-api";
-import Layout from "./Layout";
+import Layout from "./app-layout/Layout";
+import Login from "./pages/Login";
+import MainPage from "./pages/MainPage";
 
 const webApi = new ApplicationApi(new ApplicationRestApi());
 
@@ -55,9 +54,8 @@ function App() {
       <ApplicationContext.Provider value={applicationContext}>
         <Layout>
           <Routes>
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/movies" element={<MoviesPage />} />
-            <Route path="/movie/:id" element={<MovieDetailsPage />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/movies" element={<MainPage />} />
             <Route path="*" element={<Navigate to="/movies" />} />
           </Routes>
         </Layout>
