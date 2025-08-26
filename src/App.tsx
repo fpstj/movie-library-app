@@ -22,9 +22,6 @@ const webApi = new ApplicationApi(new ApplicationRestApi());
 
 function App() {
   const [userSession, setUserSession] = useState<UserSession | null>(null);
-  const [communicationToken, setCommunicationToken] = useState<string | null>(
-    null
-  );
 
   useEffect(() => {
     try {
@@ -41,12 +38,10 @@ function App() {
   const applicationContext: ApplicationContextProps = useMemo(
     () => ({
       webApi,
-      communicationToken,
-      setCommunicationToken,
       userSession,
       setUserSession,
     }),
-    [communicationToken, userSession]
+    [userSession]
   );
 
   return (

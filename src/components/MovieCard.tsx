@@ -1,5 +1,5 @@
 import React from "react";
-import starUrl from "../assets/icons/star.svg";
+import StarIcon from "../assets/icons/star.svg";
 
 export type Movie = {
   id: number;
@@ -33,7 +33,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie, onClick }) => {
         backgroundColor: "#000000ff",
       }}
       onClick={() => onClick(movie)}
-      onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.05)")}
+      onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.025)")}
       onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
     >
       <img
@@ -49,7 +49,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie, onClick }) => {
             return (
               <img
                 key={i}
-                src={starUrl}
+                src={StarIcon}
                 alt={fullStar ? "Full star" : "Empty star"}
                 style={{
                   width: "20px",

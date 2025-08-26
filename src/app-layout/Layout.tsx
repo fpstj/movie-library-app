@@ -30,7 +30,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => (
       style={{ margin: 0, padding: 0, height: "100vh" }}
     >
       <Navbar />
-      <div className="flex-grow-1 d-flex flex-column">{children}</div>
+      <div className="d-flex flex-column flex-grow-1 justify-content-center align-items-center">
+        {children}
+      </div>
       <Footer />
     </main>
   </div>
