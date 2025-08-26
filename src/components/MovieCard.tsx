@@ -25,8 +25,12 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie, onClick }) => {
         cursor: "pointer",
         transition: "transform 0.2s",
         overflow: "hidden",
-        background:
-          "radial-gradient(125% 125% at 50% 10%, #131313ff 40%, #2a072bff 100%)",
+        backgroundImage: `
+          radial-gradient(circle at 50% 100%, rgba(70, 85, 110, 0.5) 0%, transparent 30%),
+          radial-gradient(circle at 50% 100%, rgba(99, 102, 241, 0.4) 0%, transparent 40%),
+          radial-gradient(circle at 50% 100%, rgba(181, 184, 208, 0.3) 0%, transparent 50%)
+        `,
+        backgroundColor: "#000000ff",
       }}
       onClick={() => onClick(movie)}
       onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.05)")}
@@ -72,7 +76,10 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie, onClick }) => {
         <p className="card-text mb-1" style={{ fontSize: "0.9rem" }}>
           {movie.year}
         </p>
-        <p className="card-text" style={{ fontSize: "0.95rem", color: "#666" }}>
+        <p
+          className="card-text"
+          style={{ fontSize: "0.95rem", color: "#a2b0bbff" }}
+        >
           {movie.description}
         </p>
       </div>

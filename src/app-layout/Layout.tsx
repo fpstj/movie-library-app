@@ -16,8 +16,13 @@ const Layout: React.FC<LayoutProps> = ({ children }) => (
       height: "100vh",
       margin: 0,
       padding: 0,
-      backgroundImage: `radial-gradient(circle 500px at 50% 100px, rgba(139,92,246,0.4), transparent)`,
-      background: "#181818",
+      backgroundImage: `
+        radial-gradient(ellipse at 20% 30%, rgba(56, 189, 248, 0.4) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 70%, rgba(139, 92, 246, 0.3) 0%, transparent 70%),
+        radial-gradient(ellipse at 60% 20%, rgba(236, 72, 153, 0.25) 0%, transparent 50%),
+        radial-gradient(ellipse at 40% 80%, rgba(34, 197, 94, 0.2) 0%, transparent 65%)
+      `,
+      backgroundColor: "#1f1f1fff",
     }}
   >
     <main
