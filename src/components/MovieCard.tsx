@@ -1,5 +1,5 @@
 import React from "react";
-import starUrl from "../icons/star.svg";
+import starUrl from "../assets/icons/star.svg";
 
 export type Movie = {
   id: number;
@@ -18,13 +18,15 @@ interface MovieCardProps {
 const MovieCard: React.FC<MovieCardProps> = ({ movie, onClick }) => {
   return (
     <div
-      className="card d-flex align-items-stretch m-2 p-0 shadow-sm"
+      className="card d-flex align-items-stretch m-2 p-0 text-white shadow-sm border border-opacity-25"
       style={{
         width: "16rem",
         minHeight: "20rem",
         cursor: "pointer",
         transition: "transform 0.2s",
         overflow: "hidden",
+        background:
+          "radial-gradient(125% 125% at 50% 10%, #131313ff 40%, #2a072bff 100%)",
       }}
       onClick={() => onClick(movie)}
       onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.05)")}

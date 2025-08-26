@@ -82,9 +82,9 @@ export class ApplicationRestApi implements IApplicationApi {
     }
   }
 
-  async getMovies(): Promise<Movie[]> {
+  async getMovies(page: number = 1): Promise<Movie[]> {
     const response = await fetch(
-      `https://api.themoviedb.org/3/movie/popular?api_key=${this.apiKey}`
+      `https://api.themoviedb.org/3/movie/popular?api_key=${this.apiKey}&page=${page}`
     );
     const data = await response.json();
     return data.results;

@@ -16,6 +16,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => (
       height: "100vh",
       margin: 0,
       padding: 0,
+      backgroundImage: `radial-gradient(circle 500px at 50% 100px, rgba(139,92,246,0.4), transparent)`,
       background: "#181818",
     }}
   >
@@ -24,9 +25,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => (
       style={{ margin: 0, padding: 0, height: "100vh" }}
     >
       <Navbar />
-      <div className="flex-grow-1 d-flex flex-column">
-        {children}
-      </div>
+      <div className="flex-grow-1 d-flex flex-column">{children}</div>
       <Footer />
     </main>
   </div>
